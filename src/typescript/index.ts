@@ -1,16 +1,12 @@
 
-    // eslint-disable-next-line import/no-deprecated
-    // import './de/mayflower/bz/css/global.less';
-    // import * as bz from './de/mayflower/bz';
+    import { Mfg } from "./Mfg";
 
     /** ****************************************************************************************************************
     *   Being invoked when the page is loaded completely.
     *******************************************************************************************************************/
     window.onload = () : void  =>
     {
-        // bz.Main.main();
-
-       console.log( "Welcome to the TypeScript Workshop" );
+        Mfg.main();
     };
 
     /** ****************************************************************************************************************
