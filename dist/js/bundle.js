@@ -172,6 +172,7 @@ var MfgDemo = /** @class */ (function () {
         this.canvasContext = null;
         /** All rects to show in the demo. */
         this.items = null;
+        this.player = null;
         /**
          *   Handles one demo tick.
          */
@@ -209,6 +210,7 @@ var MfgDemo = /** @class */ (function () {
             new MfgRect_1.MfgRect(550, 250, 30, 120, "red"),
             new MfgRect_1.MfgRect(620, 75, 150, 50, "grey"),
         ];
+        this.player = new MfgRect_1.MfgRect(100, 200, 50, 40, "blue");
         console.log("Created [" + this.items.length + "] rects.");
     };
     /**
@@ -235,6 +237,7 @@ var MfgDemo = /** @class */ (function () {
             }
             finally { if (e_1) throw e_1.error; }
         }
+        // player does not fall down
     };
     /**
      *   Draws the current game tick.
@@ -255,6 +258,8 @@ var MfgDemo = /** @class */ (function () {
             }
             finally { if (e_2) throw e_2.error; }
         }
+        // this.canvasContext.clearRect(0, 0, 900, 500);
+        this.player.draw(this.canvasContext);
     };
     return MfgDemo;
 }());

@@ -11,6 +11,7 @@ export class MfgDemo
     /** All rects to show in the demo. */
     private                 items                   :Array<MfgRect>                 = null;
 
+    private                 player                  :MfgRect                        = null;
 
     /**
      *   Creates a new demo logic.
@@ -50,6 +51,7 @@ export class MfgDemo
      */
     private initRects():void
     {
+
         this.items = [
             new MfgRect(125, 25,  75,  75,  "orange"),
             new MfgRect(300, 150, 120, 30,  "yellow"),
@@ -57,6 +59,7 @@ export class MfgDemo
             new MfgRect(620, 75,  150, 50,  "grey"  ),
         ];
 
+        this.player = new MfgRect(100, 200, 50, 40, "blue");
 
         console.log("Created [" + this.items.length + "] rects.");
     }
@@ -86,6 +89,9 @@ export class MfgDemo
         for (let item of this.items) {
             item.y += 0.5;
         }
+
+        // player does not fall down
+
     }
 
     /**
@@ -94,8 +100,14 @@ export class MfgDemo
     private draw():void
     {
         this.canvasContext.clearRect(0, 0, 900, 500);
+
         for (let item of this.items) {
             item.draw(this.canvasContext);
         }
+        // this.canvasContext.clearRect(0, 0, 900, 500);
+
+        this.player.draw(this.canvasContext);
+
+
     }
 }
