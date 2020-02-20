@@ -390,17 +390,17 @@ var MfgDemo = /** @class */ (function () {
      *   Renders the current game tick.
      */
     MfgDemo.prototype.render = function () {
-        var e_1, _a;
+        var e_1, _a, e_2, _b;
         try {
-            for (var _b = __values(this.items), _c = _b.next(); !_c.done; _c = _b.next()) {
-                var item = _c.value;
+            for (var _c = __values(this.items), _d = _c.next(); !_d.done; _d = _c.next()) {
+                var item = _d.value;
                 item.y += 0.5;
             }
         }
         catch (e_1_1) { e_1 = { error: e_1_1 }; }
         finally {
             try {
-                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
             }
             finally { if (e_1) throw e_1.error; }
         }
@@ -416,12 +416,29 @@ var MfgDemo = /** @class */ (function () {
         if (this.keySystem.isPressed(KeyCodes_1.KeyCodes.KEY_DOWN)) {
             this.player.y += 5.0;
         }
+        try {
+            // check collision of player with item
+            for (var _e = __values(this.items), _f = _e.next(); !_f.done; _f = _e.next()) {
+                var item = _f.value;
+                if (this.player.collidesWithRect(item)) {
+                    // console.log( "kollision!" );
+                    item.color = 'transparent';
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_f && !_f.done && (_b = _e.return)) _b.call(_e);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
     };
     /**
      *   Draws the current game tick.
      */
     MfgDemo.prototype.draw = function () {
-        var e_2, _a;
+        var e_3, _a;
         this.canvasContext.clearRect(0, 0, 900, 500);
         try {
             for (var _b = __values(this.items), _c = _b.next(); !_c.done; _c = _b.next()) {
@@ -429,12 +446,12 @@ var MfgDemo = /** @class */ (function () {
                 item.draw(this.canvasContext);
             }
         }
-        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
         finally {
             try {
                 if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
             }
-            finally { if (e_2) throw e_2.error; }
+            finally { if (e_3) throw e_3.error; }
         }
         // this.canvasContext.clearRect(0, 0, 900, 500);
         this.player.draw(this.canvasContext);
@@ -494,6 +511,19 @@ var MfgRect = /** @class */ (function () {
     MfgRect.prototype.draw = function (ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+    /*****************************************************************************
+     *   Checks if the given rect intersects this rect.
+     *
+     *   @param  rect    The rect to check for intersection.
+     *   @return         <code>true</code> if the rects collide.
+     *                   Otherwise <code>false</code>.
+     *****************************************************************************/
+    MfgRect.prototype.collidesWithRect = function (rect) {
+        return !(this.x >= rect.x + rect.width
+            || this.x + this.width <= rect.x
+            || this.y >= rect.y + rect.height
+            || this.y + this.height <= rect.y);
     };
     return MfgRect;
 }());

@@ -123,8 +123,16 @@ export class MfgDemo
             this.player.y += 5.0
         }
 
+        // check collision of player with item
+        for (let item of this.items) {
 
+            if ( this.player.collidesWithRect( item  ) )
+            {
+                // console.log( "kollision!" );
 
+                item.color = 'transparent';
+            }
+        }
     }
 
     /**
