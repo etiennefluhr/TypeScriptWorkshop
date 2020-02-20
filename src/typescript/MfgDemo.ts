@@ -138,7 +138,12 @@ export class MfgDemo
 
             // console.log( "Hallo" );
 
-            this.player.x = 100
+            this.player.x = 900
+        }
+
+        if ( this.player.y <=0 ) {
+
+            this.player.y = 500
         }
 
     }
