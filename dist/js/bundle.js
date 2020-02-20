@@ -86,6 +86,79 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/typescript/KeyCodes.ts":
+/*!************************************!*\
+  !*** ./src/typescript/KeyCodes.ts ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/** ****************************************************************************************************************
+ *   All key codes that are used in the game.
+ *******************************************************************************************************************/
+var KeyCodes = /** @class */ (function () {
+    function KeyCodes() {
+    }
+    /** The keycode that represents the 'ARROW LEFT' key. */
+    KeyCodes.KEY_LEFT = 'ArrowLeft';
+    /** The keycode that represents the 'ARROW UP' key. */
+    KeyCodes.KEY_UP = 'ArrowUp';
+    /** The keycode that represents the 'ARROW RIGHT' key. */
+    KeyCodes.KEY_RIGHT = 'ArrowRight';
+    /** The keycode that represents the 'ARROW DOWN' key. */
+    KeyCodes.KEY_DOWN = 'ArrowDown';
+    /** The keycode that represents the 'W' key. */
+    KeyCodes.KEY_W = 'KeyW';
+    /** The keycode that represents the 'A' key. */
+    KeyCodes.KEY_A = 'KeyA';
+    /** The keycode that represents the 'S' key. */
+    KeyCodes.KEY_S = 'KeyS';
+    /** The keycode that represents the 'D' key. */
+    KeyCodes.KEY_D = 'KeyD';
+    /** The keycode that represents the 'Q' key. */
+    KeyCodes.KEY_Q = 'KeyQ';
+    /** The keycode that represents the 'E' key. */
+    KeyCodes.KEY_E = 'KeyE';
+    /** The keycode that represents the 'F' key. */
+    KeyCodes.KEY_F = 'KeyF';
+    /** The keycode that represents the 'R' key. */
+    KeyCodes.KEY_R = 'KeyR';
+    /** The keycode that represents the 'Y' key. This is affected by the EN keyboard scheme. */
+    KeyCodes.KEY_Y = 'KeyZ';
+    /** The keycode that represents the 'X' key. */
+    KeyCodes.KEY_X = 'KeyX';
+    /** The keycode that represents the 'P' key. */
+    KeyCodes.KEY_P = 'KeyP';
+    /** The keycode that represents the 'ENTER' key. */
+    KeyCodes.KEY_ENTER = 'Enter';
+    /** The keycode that represents the 'ESCAPE' key. */
+    KeyCodes.KEY_ESCAPE = 'Escape';
+    /** The keycode that represents the 'SPACE' key. */
+    KeyCodes.KEY_SPACE = 'Space';
+    /** The keycode that represents the 'LEFT CONTROL' key. */
+    KeyCodes.KEY_CTRL_LEFT = 'ControlLeft';
+    /** The keycode that represents the 'LEFT SHIFT' key. */
+    KeyCodes.KEY_SHIFT_LEFT = 'ShiftLeft';
+    /** The keycode that represents the '1' key. */
+    KeyCodes.KEY_1 = 'Digit1';
+    /** The keycode that represents the '2' key. */
+    KeyCodes.KEY_2 = 'Digit2';
+    /** The keycode that represents the '3' key. */
+    KeyCodes.KEY_3 = 'Digit3';
+    /** The keycode that represents the '4' key. */
+    KeyCodes.KEY_4 = 'Digit4';
+    /** The keycode that represents the '5' key. */
+    KeyCodes.KEY_5 = 'Digit5';
+    return KeyCodes;
+}());
+exports.KeyCodes = KeyCodes;
+
+
+/***/ }),
+
 /***/ "./src/typescript/KeySystem.ts":
 /*!*************************************!*\
   !*** ./src/typescript/KeySystem.ts ***!
@@ -242,6 +315,7 @@ var __values = (this && this.__values) || function(o) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var MfgRect_1 = __webpack_require__(/*! ./MfgRect */ "./src/typescript/MfgRect.ts");
+var KeyCodes_1 = __webpack_require__(/*! ./KeyCodes */ "./src/typescript/KeyCodes.ts");
 var KeySystem_1 = __webpack_require__(/*! ./KeySystem */ "./src/typescript/KeySystem.ts");
 /**
  *   Handles the demo logic.
@@ -330,7 +404,18 @@ var MfgDemo = /** @class */ (function () {
             }
             finally { if (e_1) throw e_1.error; }
         }
-        // player does not fall down
+        if (this.keySystem.isPressed(KeyCodes_1.KeyCodes.KEY_RIGHT)) {
+            this.player.x += 5.0;
+        }
+        if (this.keySystem.isPressed(KeyCodes_1.KeyCodes.KEY_LEFT)) {
+            this.player.x -= 5.0;
+        }
+        if (this.keySystem.isPressed(KeyCodes_1.KeyCodes.KEY_UP)) {
+            this.player.y -= 5.0;
+        }
+        if (this.keySystem.isPressed(KeyCodes_1.KeyCodes.KEY_DOWN)) {
+            this.player.y += 5.0;
+        }
     };
     /**
      *   Draws the current game tick.

@@ -103,8 +103,25 @@ export class MfgDemo
             item.y += 0.5;
         }
 
-        // player does not fall down
+        if ( this.keySystem.isPressed( KeyCodes.KEY_RIGHT ) )
+        {
+            this.player.x += 5.0;
+        }
 
+        if ( this.keySystem.isPressed( KeyCodes.KEY_LEFT ) )
+        {
+            this.player.x -= 5.0;
+        }
+
+        if ( this.keySystem.isPressed( KeyCodes.KEY_UP ) )
+        {
+            this.player.y -= 5.0
+        }
+
+        if ( this.keySystem.isPressed( KeyCodes.KEY_DOWN ) )
+        {
+            this.player.y += 5.0
+        }
     }
 
     /**
