@@ -86,6 +86,89 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/typescript/KeySystem.ts":
+/*!*************************************!*\
+  !*** ./src/typescript/KeySystem.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+/** ****************************************************************************************************************
+ *   The key system that manages all pressed keys.
+ *******************************************************************************************************************/
+var KeySystem = /** @class */ (function () {
+    /** ************************************************************************************************************
+     *   Creates a new key system.
+     ***************************************************************************************************************/
+    function KeySystem() {
+        var _this = this;
+        /** All 'pressed' information for all keys. */
+        this.keysPressed = [];
+        /** All 'needs release' information for all keys. */
+        this.keysNeedRelease = [];
+        window.addEventListener('keydown', function (event) { _this.onKeyDown(event); }, false);
+        window.addEventListener('keyup', function (event) { _this.onKeyUp(event); }, false);
+        window.addEventListener('onkeydown', function (event) { _this.onKeyDown(event); }, false);
+        window.addEventListener('onkeyup', function (event) { _this.onKeyUp(event); }, false);
+    }
+    /** ************************************************************************************************************
+     *   Being invoked by the system when a key is pressed.
+     *
+     *   @param event The system's propagated key event.
+     ***************************************************************************************************************/
+    KeySystem.prototype.onKeyDown = function (event) {
+        var keyCode = event.code;
+        if (!this.keysNeedRelease[keyCode]) {
+            this.keysPressed[keyCode] = true;
+        }
+    };
+    /** ************************************************************************************************************
+     *   Being invoked by the system when a key is released.
+     *
+     *   @param event The system's propagated key event.
+     ***************************************************************************************************************/
+    KeySystem.prototype.onKeyUp = function (event) {
+        var keyCode = event.code;
+        this.keysPressed[keyCode] = false;
+        this.keysNeedRelease[keyCode] = false;
+    };
+    /** ************************************************************************************************************
+     *   Checks if the key with the given keyCode is currently pressed.
+     *
+     *   @param  keyCode The keyCode of the key to return pressed state.
+     *
+     *   @return         <code>true</code> if this key is currently pressed.
+     *                   Otherwise <code>false</code>.
+     ***************************************************************************************************************/
+    KeySystem.prototype.isPressed = function (keyCode) {
+        return this.keysPressed[keyCode];
+    };
+    /** ************************************************************************************************************
+     *   Flags that a key needs release before being able to be pressed again.
+     *
+     *   @param keyCode The keyCode of the key to mark as 'needs key release'.
+     ***************************************************************************************************************/
+    KeySystem.prototype.setNeedsRelease = function (keyCode) {
+        this.keysNeedRelease[keyCode] = true;
+        this.keysPressed[keyCode] = false;
+    };
+    /** ************************************************************************************************************
+     *   Flags all keys as released, forcing the user to press certain keys again.
+     *   Handy to invoke when the game screen loses the focus.
+     ***************************************************************************************************************/
+    KeySystem.prototype.releaseAllKeys = function () {
+        this.keysPressed = [];
+    };
+    return KeySystem;
+}());
+exports.KeySystem = KeySystem;
+
+
+/***/ }),
+
 /***/ "./src/typescript/Mfg.ts":
 /*!*******************************!*\
   !*** ./src/typescript/Mfg.ts ***!
@@ -159,6 +242,7 @@ var __values = (this && this.__values) || function(o) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var MfgRect_1 = __webpack_require__(/*! ./MfgRect */ "./src/typescript/MfgRect.ts");
+var KeySystem_1 = __webpack_require__(/*! ./KeySystem */ "./src/typescript/KeySystem.ts");
 /**
  *   Handles the demo logic.
  */
@@ -170,6 +254,8 @@ var MfgDemo = /** @class */ (function () {
         var _this = this;
         /** The canvas rendering context for all 2D drawing operations. */
         this.canvasContext = null;
+        /** The key system. */
+        this.keySystem = null;
         /** All rects to show in the demo. */
         this.items = null;
         this.player = null;
@@ -186,7 +272,8 @@ var MfgDemo = /** @class */ (function () {
      */
     MfgDemo.prototype.init = function () {
         this.initCanvas();
-        this.initRects();
+        this.initKeySystem();
+        this.initGameElements();
         this.startDemoLoop();
     };
     /**
@@ -201,9 +288,15 @@ var MfgDemo = /** @class */ (function () {
         this.canvasContext = canvasTag.getContext("2d");
     };
     /**
+     *   Inits the key system.
+     */
+    MfgDemo.prototype.initKeySystem = function () {
+        this.keySystem = new KeySystem_1.KeySystem();
+    };
+    /**
      *   Inits all rects for this level.
      */
-    MfgDemo.prototype.initRects = function () {
+    MfgDemo.prototype.initGameElements = function () {
         this.items = [
             new MfgRect_1.MfgRect(125, 25, 75, 75, "orange"),
             new MfgRect_1.MfgRect(300, 150, 120, 30, "yellow"),

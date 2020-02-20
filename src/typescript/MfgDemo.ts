@@ -1,4 +1,6 @@
 import { MfgRect } from "./MfgRect";
+import { KeyCodes } from "./KeyCodes";
+import { KeySystem } from "./KeySystem";
 
 /**
  *   Handles the demo logic.
@@ -7,6 +9,8 @@ export class MfgDemo
 {
     /** The canvas rendering context for all 2D drawing operations. */
     private                 canvasContext           :CanvasRenderingContext2D       = null;
+    /** The key system. */
+    private                 keySystem               :KeySystem                      = null;
 
     /** All rects to show in the demo. */
     private                 items                   :Array<MfgRect>                 = null;
@@ -26,7 +30,8 @@ export class MfgDemo
     public init():void
     {
         this.initCanvas();
-        this.initRects();
+        this.initKeySystem();
+        this.initGameElements();
 
         this.startDemoLoop();
     }
@@ -46,12 +51,20 @@ export class MfgDemo
 
         this.canvasContext = canvasTag.getContext("2d");
     }
+
+    /**
+     *   Inits the key system.
+     */
+    private initKeySystem():void
+    {
+        this.keySystem = new KeySystem();
+    }
+
     /**
      *   Inits all rects for this level.
      */
-    private initRects():void
+    private initGameElements():void
     {
-
         this.items = [
             new MfgRect(125, 25,  75,  75,  "orange"),
             new MfgRect(300, 150, 120, 30,  "yellow"),
