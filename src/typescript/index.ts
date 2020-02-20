@@ -1,5 +1,5 @@
 
-    import { Mfg } from "./Mfg";
+    import { Mfg } from './Mfg';
 
     /** ****************************************************************************************************************
     *   Being invoked when the page is loaded completely.

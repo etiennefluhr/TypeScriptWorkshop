@@ -1,6 +1,6 @@
-import { MfgRect } from "./MfgRect";
-import { KeyCodes } from "./KeyCodes";
-import { KeySystem } from "./KeySystem";
+import { MfgRect } from './MfgRect';
+import { KeyCodes } from './KeyCodes';
+import { KeySystem } from './KeySystem';
 
 /**
  *   Handles the demo logic.
@@ -13,7 +13,7 @@ export class MfgDemo
     private                 keySystem               :KeySystem                      = null;
 
     /** All rects to show in the demo. */
-    private                 items                   :Array<MfgRect>                 = null;
+    private                 items                   :MfgRect[]                 = null;
 
     private                 player                  :MfgRect                        = null;
 
@@ -41,15 +41,15 @@ export class MfgDemo
      */
     private initCanvas():void
     {
-        let canvasTag:HTMLCanvasElement = document.createElement("canvas");
+        const canvasTag:HTMLCanvasElement = document.createElement('canvas');
 
         canvasTag.width                 = 900;
         canvasTag.height                = 500;
-        canvasTag.style.backgroundColor = "white";
+        canvasTag.style.backgroundColor = 'white';
 
         document.body.appendChild(canvasTag);
 
-        this.canvasContext = canvasTag.getContext("2d");
+        this.canvasContext = canvasTag.getContext('2d');
     }
 
     /**
@@ -66,15 +66,15 @@ export class MfgDemo
     private initGameElements():void
     {
         this.items = [
-            new MfgRect(125, 25,  75,  75,  "orange"),
-            new MfgRect(300, 150, 120, 30,  "yellow"),
-            new MfgRect(550, 250, 30,  120, "red"   ),
-            new MfgRect(620, 75,  150, 50,  "grey"  ),
+            new MfgRect(125, 25,  75,  75,  'orange'),
+            new MfgRect(300, 150, 120, 30,  'yellow'),
+            new MfgRect(550, 250, 30,  120, 'red'   ),
+            new MfgRect(620, 75,  150, 50,  'grey'  ),
         ];
 
-        this.player = new MfgRect(100, 200, 50, 40, "blue");
+        this.player = new MfgRect(100, 200, 50, 40, 'blue');
 
-        console.log("Created [" + this.items.length + "] rects.");
+        console.log('Created [' + this.items.length + '] rects.');
     }
 
     /**
@@ -99,7 +99,7 @@ export class MfgDemo
      */
     private render():void
     {
-        for (let item of this.items) {
+        for (const item of this.items) {
             item.y += 0.5;
         }
 
@@ -124,7 +124,7 @@ export class MfgDemo
         }
 
         // check collision of player with item
-        for (let item of this.items) {
+        for (const item of this.items) {
 
             if ( this.player.collidesWithRect( item  ) )
             {
@@ -133,6 +133,14 @@ export class MfgDemo
                 item.color = 'transparent';
             }
         }
+
+        if ( this.player.x <=0 ) {
+
+            // console.log( "Hallo" );
+
+            this.player.x = 100
+        }
+
     }
 
     /**
@@ -142,13 +150,12 @@ export class MfgDemo
     {
         this.canvasContext.clearRect(0, 0, 900, 500);
 
-        for (let item of this.items) {
+        for (const item of this.items) {
             item.draw(this.canvasContext);
         }
         // this.canvasContext.clearRect(0, 0, 900, 500);
 
         this.player.draw(this.canvasContext);
-
 
     }
 }
