@@ -100,7 +100,7 @@ export class MfgDemo
     private render():void
     {
         for (const item of this.items) {
-            item.y += 0.5;
+            item.y += 0.8;
         }
 
         if ( this.keySystem.isPressed( KeyCodes.KEY_RIGHT ) )
@@ -141,9 +141,19 @@ export class MfgDemo
             this.player.x = 900
         }
 
+        if ( this.player.x == 910 ) {
+
+            this.player.x = 0
+        }
+
         if ( this.player.y <=0 ) {
 
             this.player.y = 500
+        }
+
+        if ( this.player.y == 510 ) {
+
+            this.player.y = 0
         }
 
     }
