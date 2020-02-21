@@ -157,8 +157,11 @@ export class MfgDemo
             this.player.y = 0
         }
 
+        for (const item of this.items) {
+
         if ( this.player.collidesWithRect ( item ) ) {
             location.reload( true);
+        }
         }
     }
 
