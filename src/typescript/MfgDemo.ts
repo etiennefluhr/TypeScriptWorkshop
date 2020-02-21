@@ -69,7 +69,7 @@ export class MfgDemo
             new MfgRect(125, 25,  75,  75,  'orange'),
             new MfgRect(300, 150, 120, 30,  'yellow'),
             new MfgRect(550, 250, 30,  120, 'red'   ),
-            new MfgRect(620, 75,  150, 50,  'grey'  ),
+            new MfgRect(620, 75,  100, 50,  'grey'  ),
         ];
 
         this.player = new MfgRect(100, 200, 50, 40, 'blue');
@@ -134,28 +134,32 @@ export class MfgDemo
             }
         }
 
+        //lets player move threw a wall to the opposite wall
         if ( this.player.x <=0 ) {
 
-            // console.log( "Hallo" );
+            // console.log( "hit the end." );
 
             this.player.x = 900
         }
 
-        if ( this.player.x == 910 ) {
+        if ( this.player.x == 905 ) {
 
             this.player.x = 0
         }
 
-        if ( this.player.y <=0 ) {
+       if ( this.player.y <=0 ) {
 
-            this.player.y = 500
+           this.player.y = 500
         }
 
-        if ( this.player.y == 510 ) {
+        if ( this.player.y == 505 ) {
 
             this.player.y = 0
         }
 
+        if ( this.player.collidesWithRect ( item ) ) {
+            location.reload( true);
+        }
     }
 
     /**
