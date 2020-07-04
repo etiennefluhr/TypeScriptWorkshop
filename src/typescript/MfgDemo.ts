@@ -43,8 +43,8 @@ export class MfgDemo
     {
         const canvasTag:HTMLCanvasElement = document.createElement('canvas');
 
-        canvasTag.width                 = 900;
-        canvasTag.height                = 500;
+        canvasTag.width                 = 1200;
+        canvasTag.height                = 700;
         canvasTag.style.backgroundColor = 'white';
 
         document.body.appendChild(canvasTag);
@@ -70,6 +70,7 @@ export class MfgDemo
             new MfgRect(300, 150, 120, 30,  'yellow'),
             new MfgRect(550, 250, 30,  120, 'red'   ),
             new MfgRect(620, 75,  100, 50,  'grey'  ),
+            new MfgRect( 800, 40, 300, 50, 'red' ),
         ];
 
         this.player = new MfgRect(100, 200, 50, 40, 'blue');
@@ -139,30 +140,31 @@ export class MfgDemo
 
             // console.log( "hit the end." );
 
-            this.player.x = 900
+            this.player.x = 1200
         }
 
-        if ( this.player.x == 905 ) {
+        if ( this.player.x == 1205 ) {
 
             this.player.x = 0
         }
 
        if ( this.player.y <=0 ) {
 
-           this.player.y = 500
+           this.player.y = 700
         }
 
-        if ( this.player.y == 505 ) {
+        if ( this.player.y == 705 ) {
 
             this.player.y = 0
         }
 
         for (const item of this.items) {
 
-        if ( this.player.collidesWithRect ( item ) ) {
-            location.reload( true);
-        }
-        }
+            if ( this.player.collidesWithRect ( item ) ) {
+                location.reload( true);
+            }
+            }
+
     }
 
     /**
@@ -170,7 +172,7 @@ export class MfgDemo
      */
     private draw():void
     {
-        this.canvasContext.clearRect(0, 0, 900, 500);
+        this.canvasContext.clearRect(0, 0, 1200, 700);
 
         for (const item of this.items) {
             item.draw(this.canvasContext);
