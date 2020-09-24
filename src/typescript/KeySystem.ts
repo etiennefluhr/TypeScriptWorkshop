@@ -16,7 +16,6 @@ export class KeySystem
     {
         window.addEventListener( 'keydown',     ( event:Event ) => { this.onKeyDown( event ) }, false );
         window.addEventListener( 'keyup',       ( event:Event ) => { this.onKeyUp(   event ) }, false );
-
         window.addEventListener( 'onkeydown',   ( event:Event ) => { this.onKeyDown( event ) }, false );
         window.addEventListener( 'onkeyup',     ( event:Event ) => { this.onKeyUp(   event ) }, false );
     }

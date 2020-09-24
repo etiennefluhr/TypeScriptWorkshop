@@ -75,6 +75,7 @@ export class MfgDemo
 
         this.player = new MfgRect(100, 200, 50, 40, 'blue');
 
+        // eslint-disable-next-line no-console
         console.log('Created [' + this.items.length + '] rects.');
     }
 
@@ -135,7 +136,7 @@ export class MfgDemo
             }
         }
 
-        //lets player move threw a wall to the opposite wall
+        // lets player move threw a wall to the opposite wall
         if ( this.player.x <=0 ) {
 
             // console.log( "hit the end." );
@@ -153,10 +154,11 @@ export class MfgDemo
            this.player.y = 700
         }
 
-        if ( this.player.y == 705 ) {
+        if ( this.player.y === 705 ) {
 
             this.player.y = 0
         }
+
 
         for (const item of this.items) {
 
